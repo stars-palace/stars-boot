@@ -2,12 +2,12 @@ package xnacos_registry
 
 import (
 	"context"
-	"github.com/brian-god/brian-go/pkg/client/xnacos_client"
-	"github.com/brian-god/brian-go/pkg/registry"
-	"github.com/brian-god/brian-go/pkg/server"
 	"github.com/nacos-group/nacos-sdk-go/clients/naming_client"
 	"github.com/nacos-group/nacos-sdk-go/common/constant"
 	"github.com/nacos-group/nacos-sdk-go/vo"
+	"github.com/stars-palace/stars-boot/pkg/client/xnacos_client"
+	"github.com/stars-palace/stars-boot/pkg/registry"
+	"github.com/stars-palace/stars-boot/pkg/server"
 )
 
 /**

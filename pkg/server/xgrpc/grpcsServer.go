@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"github.com/sirupsen/logrus"
 	"github.com/stars-palace/stars-boot/pkg/server"
+	"github.com/stars-palace/stars-boot/pkg/xconst"
+	"github.com/stars-palace/statrs-common/pkg/xlogger"
 	"google.golang.org/grpc"
 	"net"
 	"reflect"
@@ -56,7 +58,7 @@ func newServer(config *Config) *Server {
 	//创建服务监听指定协议和地址
 	listener, err := net.Listen(config.Network, config.Address())
 	if err != nil {
-		config.logger.Panic("new grpc server err", xlogger.FieldErrKind(xcodec.ErrKindListenErr), xlogger.FieldErr(err))
+		config.logger.Panic("new grpc server err", xlogger.FieldErrKind(xconst.ErrKindListenErr), xlogger.FieldErr(err))
 	}
 	//设置地址信心
 	config.Port = listener.Addr().(*net.TCPAddr).Port

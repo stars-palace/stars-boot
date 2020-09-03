@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/stars-palace/stars-boot/pkg/xconst"
 	"github.com/stars-palace/statrs-common/pkg/xcodec"
 	"google.golang.org/grpc"
 	"net/http"
@@ -153,7 +154,7 @@ func _Index_Handler(srv interface{}, ctx context.Context, dec func(interface{}) 
 // ChickRequest 校验请求信息
 func ChickRequest(req *HugoRequest) error {
 	if len(req.MethodName) == 0 {
-		return errors.New(xcodec.ErrREQNotMethod)
+		return errors.New(xconst.ErrREQNotMethod)
 	}
 	return nil
 }
@@ -166,7 +167,7 @@ func ChickResponse(out *HugoResponse) error {
 		if !(len(out.Message) == 0) {
 			return errors.New(out.Message)
 		} else {
-			return errors.New(xcodec.ErrServerException)
+			return errors.New(xconst.ErrServerException)
 		}
 	}
 	return nil
