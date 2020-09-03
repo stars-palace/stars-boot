@@ -121,7 +121,7 @@ func RewConfigApplication() *Application {
 	//配置加载
 	app.loadConfig()
 	//读取配置文件中对应用的配置
-	if err := conf.Unmarshal(app); err != nil {
+	if err := conf.UnmarshalToStruct(app); err != nil {
 		logrus.Panic("read app config  error", xlogger.FieldMod(xconst.ModApp), xlogger.FieldErrKind(xconst.ReadAppConfigErr), xlogger.FieldErr(err))
 	}
 	//创建读取配置http服务
@@ -170,7 +170,11 @@ func (app *Application) serveGRPC() error {
 
 // RegisterRpcServer 注册rpc服务
 func (app *Application) RegisterRpcServer(in interface{}, srv interface{}) {
-	app.rpcServer.Register(in, srv)
+	if app.rpcServer != nil {
+		app.rpcServer.Register(in, srv)
+	} else {
+		app.logger.Panic("RegisterRpcServer err app rpcServer is nil")
+	}
 }
 
 //RegisterController 注册controller
@@ -341,13 +345,17 @@ func (app *Application) startServers() error {
 	for _, s := range app.servers {
 		s := s
 		eg.Go(func() (err error) {
-			serverInfo := s.Info(registryConfig.GroupName, registryConfig.ClusterName)
-			//注册服务
-			_ = app.registry.RegisterService(context.TODO(), serverInfo)
+			//开启注册中心进行服务注册
+			if app.EnableRegistryCenter {
+				serverInfo := s.Info(registryConfig.GroupName, registryConfig.ClusterName)
+				//注册服务
+				_ = app.registry.RegisterService(context.TODO(), serverInfo)
+				app.logger.Info("start servers", xlogger.FieldMod(xconst.ModApp), xlogger.FieldAddr(serverInfo.Label()), xlogger.Any("scheme", serverInfo.Scheme))
+
+			}
 			//注销服务
 			//defer app.registry.DeregisterService(context.TODO(), serverInfo)
 			//defer app.registry.DeregisterService(context.TODO(), serverInfo)
-			app.logger.Info("start servers", xlogger.FieldMod(xconst.ModApp), xlogger.FieldAddr(serverInfo.Label()), xlogger.Any("scheme", serverInfo.Scheme))
 			//defer app.logger.Info("exit server", logger.FieldMod(xconst.ModApp), logger.FieldErr(err), logger.FieldAddr(serverInfo.Label()))
 			return s.Serve()
 		})
@@ -481,7 +489,7 @@ func (app *Application) loadConfig() error {
 			app.logger.Panic(fmt.Sprintf("Error opening configuration file %s ", configAddr), xlogger.FieldMod(xconst.ModConfig), xlogger.FieldErrKind(xconst.ErrKindUnmarshalConfigErr), xlogger.Error(ferr))
 		}
 		fileSuffix := xfile.GetFileSuffix(f)
-		confTyep, err2 := fileDatasource.ParseConfigType(fileSuffix)
+		confTyep, err2 := fileDatasource.ParseConfigType(fileSuffix[1:])
 		if nil != err2 {
 			app.logger.Panic(fmt.Sprintf("read config err  %s ", configAddr), xlogger.FieldMod(xconst.ModConfig), xlogger.FieldErrKind(xconst.ErrKindUnmarshalConfigErr), xlogger.Error(err2))
 		}

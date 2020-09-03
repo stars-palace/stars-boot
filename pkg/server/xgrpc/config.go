@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/labstack/gommon/color"
 	"github.com/sirupsen/logrus"
+	"github.com/stars-palace/stars-boot/pkg/xconst"
 	"github.com/stars-palace/statrs-common/pkg/xlogger"
 	conf "github.com/stars-palace/statrs-config"
 	"google.golang.org/grpc"
@@ -79,7 +80,7 @@ func RawConfig() *Config {
 	var config = DefaultConfig()
 	err := conf.UnmarshalToStruct(config)
 	if nil != err {
-		logrus.Panic("Unmarshal config ", xlogger.FieldMod(xcodec.ModConfig), xlogger.FieldErrKind(xcodec.ErrKindUnmarshalConfigErr), xlogger.FieldErr(err))
+		logrus.Panic("Unmarshal config ", xlogger.FieldMod(xconst.ModConfig), xlogger.FieldErrKind(xconst.ErrKindUnmarshalConfigErr), xlogger.FieldErr(err))
 	}
 	if level, err := logrus.ParseLevel(config.logLevel); nil == err {
 		config.logger.Level = level

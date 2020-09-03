@@ -3,7 +3,7 @@ package xhttp
 import (
 	"fmt"
 	"github.com/sirupsen/logrus"
-	"github.com/stars-palace/statrs-common/pkg/xcodec"
+	"github.com/stars-palace/stars-boot/pkg/xconst"
 	"github.com/stars-palace/statrs-common/pkg/xlogger"
 	conf "github.com/stars-palace/statrs-config"
 )
@@ -56,41 +56,9 @@ func StdConfig(name string) *Config {
 // RawConfig ...
 func RawConfig(key string) *Config {
 	var config = DefaultConfig()
-	/*//端口
-	if v := conf.Get(xcodec.HttpSeverPort); v != nil {
-		if v, err := xcast.ToIntE(v); nil == err {
-			config.Port = v
-		}
-	}
-	//ip
-	if v := conf.Get(xcodec.HttpSeverHost); v != nil {
-		if v, err := xcast.ToStringE(v); nil == err {
-			config.Host = v
-		}
-	}
-	//debug
-	if v := conf.Get(xcodec.HttpServerDebug); v != nil {
-		if v, err := xcast.ToBoolE(v); nil == err {
-			config.Debug = v
-		}
-	}
-	//超时
-	if v := conf.Get(xcodec.HttpSeverTimeout); v != nil {
-		if v, err := xcast.ToInt64E(v); nil == err {
-			config.SlowQueryThresholdInMilli = v
-		}
-	}
-	//日志级别
-	if v := conf.Get(xcodec.HttpSeverLogLevel); v != nil {
-		if v, err := xcast.ToStringE(v); nil == err {
-			if level, err := logrus.ParseLevel(v); nil == err {
-				config.logger.Level = level
-			}
-		}
-	}*/
 	err := conf.UnmarshalToStruct(config)
 	if nil != err {
-		logrus.Panic("Unmarshal config ", xlogger.FieldMod(xcodec.ModConfig), xlogger.FieldErrKind(xcodec.ErrKindUnmarshalConfigErr), xlogger.FieldErr(err))
+		logrus.Panic("Unmarshal config ", xlogger.FieldMod(xconst.ModConfig), xlogger.FieldErrKind(xconst.ErrKindUnmarshalConfigErr), xlogger.FieldErr(err))
 	}
 	if level, err := logrus.ParseLevel(config.logLevel); nil == err {
 		config.logger.Level = level

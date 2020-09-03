@@ -3,6 +3,10 @@ package registry
 import (
 	"context"
 	"github.com/sirupsen/logrus"
+	"github.com/stars-palace/stars-boot/pkg/server"
+	"github.com/stars-palace/stars-boot/pkg/xconst"
+	"github.com/stars-palace/statrs-common/pkg/xlogger"
+	conf "github.com/stars-palace/statrs-config"
 	"io"
 )
 
@@ -73,9 +77,9 @@ func DefaultConfig() *RegistryConfig {
 // RewConfig 读取注册中心的相关配置
 func RewConfig() (*RegistryConfig, error) {
 	config := DefaultConfig()
-	err := conf.Unmarshal(config)
+	err := conf.UnmarshalToStruct(config)
 	if nil != err {
-		logrus.Error("Unmarshal config ", logger.FieldMod(xcodec.ModConfig), logger.FieldErrKind(xcodec.ErrKindUnmarshalConfigErr), logger.FieldErr(err))
+		logrus.Error("Unmarshal config ", xlogger.FieldMod(xconst.ModConfig), xlogger.FieldErrKind(xconst.ErrKindUnmarshalConfigErr), xlogger.FieldErr(err))
 	}
 	return config, err
 }

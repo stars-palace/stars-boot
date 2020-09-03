@@ -3,12 +3,12 @@ package main
 import (
 	"context"
 	"fmt"
+	"github.com/labstack/echo/v4"
 	stars_boot "github.com/stars-palace/stars-boot"
 	"github.com/stars-palace/stars-boot/pkg/client/xgrpc_client"
 	"github.com/stars-palace/stars-boot/pkg/server/xhttp"
 	"github.com/stars-palace/stars-boot/pkg/worker/task"
 	"github.com/stars-palace/stars-boot/test/api"
-	"github.com/labstack/echo/v4"
 	"net/http"
 	"time"
 )
@@ -49,8 +49,8 @@ func (test *ClientController) index(ctx echo.Context) error {
 }
 func main() {
 	//获取客户端链接
-	//runConfigApp()
-	time2()
+	runConfigApp()
+	//time2()
 }
 
 func time2() {

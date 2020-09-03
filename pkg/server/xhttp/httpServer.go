@@ -4,6 +4,7 @@ import (
 	"context"
 	"github.com/labstack/echo/v4"
 	"github.com/stars-palace/stars-boot/pkg/server"
+	"github.com/stars-palace/stars-boot/pkg/xconst"
 	"github.com/stars-palace/statrs-common/pkg/xlogger"
 	"log"
 	"net"
@@ -21,7 +22,7 @@ type Server struct {
 func newServer(config *Config) *Server {
 	listener, err := net.Listen("tcp", config.Address())
 	if err != nil {
-		config.logger.Panic("new xecho server err", xlogger.FieldErrKind(xcodec.ErrKindListenErr), xlogger.FieldErr(err))
+		config.logger.Panic("new xecho server err", xlogger.FieldErrKind(xconst.ErrKindListenErr), xlogger.FieldErr(err))
 	}
 	config.Port = listener.Addr().(*net.TCPAddr).Port
 	return &Server{
