@@ -116,6 +116,10 @@ github.com/smartystreets/assertions v0.0.0-20180927180507-b2de0cb4f26d/go.mod h1
 github.com/smartystreets/goconvey v0.0.0-20190330032615-68dc04aab96a/go.mod h1:syvi0/a8iFYH4r/RixwvyeAJjdLS9QV7WQ/tjFTllLA=
 github.com/smartystreets/goconvey v1.6.4 h1:fv0U8FUIMPNf1L9lnHLvLhgicrIVChEkdzIKYqbNC9s=
 github.com/smartystreets/goconvey v1.6.4/go.mod h1:syvi0/a8iFYH4r/RixwvyeAJjdLS9QV7WQ/tjFTllLA=
+github.com/stars-palace/stars-registry-center v1.0.0 h1:zuPpIpkThSaQZ6W3jNEaMgfCKuOSXJjLQmkGmRxyuiw=
+github.com/stars-palace/stars-registry-center v1.0.0/go.mod h1:vRCgThIv4HIdTijDap3Dnk8DrN7z55GfWfgKSt7NGLc=
+github.com/stars-palace/stars-registry-center v1.0.1 h1:QCmqhi/O8IsprQP15CfWPxkUVOgEPtInPpW8s1qDdxw=
+github.com/stars-palace/stars-registry-center v1.0.1/go.mod h1:vRCgThIv4HIdTijDap3Dnk8DrN7z55GfWfgKSt7NGLc=
 github.com/stars-palace/statrs-common v1.0.0 h1:f9NX3DIJiygyOPEXesJdIzQaWRC6o4d2J9ANNEyKvx4=
 github.com/stars-palace/statrs-common v1.0.0/go.mod h1:d6GpvM2lvLb53WQAsGnTFtQYgd+JKLrXE6Rvz1BC9Lk=
 github.com/stars-palace/statrs-common v1.0.1 h1:+pfDaRDuqscac3dby3GMq98XBa8VvUyPre67oI6jnrc=
@@ -124,6 +128,8 @@ github.com/stars-palace/statrs-common v1.0.2 h1:GEMMzJrE5Kf9N0/pQYBRKhTFeYre1h5V
 github.com/stars-palace/statrs-common v1.0.2/go.mod h1:d6GpvM2lvLb53WQAsGnTFtQYgd+JKLrXE6Rvz1BC9Lk=
 github.com/stars-palace/statrs-common v1.0.5 h1:EuW3r2jygOAi7jwx9tmZC5MvQVEqUxV42efYdepyLbo=
 github.com/stars-palace/statrs-common v1.0.5/go.mod h1:d6GpvM2lvLb53WQAsGnTFtQYgd+JKLrXE6Rvz1BC9Lk=
+github.com/stars-palace/statrs-common v1.0.6 h1:zsM3OzFLwZ/Au9cBmWO4ZIyiWbJGzSwAG4S2KdIt4kI=
+github.com/stars-palace/statrs-common v1.0.6/go.mod h1:d6GpvM2lvLb53WQAsGnTFtQYgd+JKLrXE6Rvz1BC9Lk=
 github.com/stars-palace/statrs-config v1.0.0 h1:77cjgZvA2RY5a5PrA2svqFqru0Tw9gfNvOagp26cwqk=
 github.com/stars-palace/statrs-config v1.0.0/go.mod h1:xuf4X8phnmnSTxGuKkeT5EEsGk/YbXwDMl7FBfvOC5I=
 github.com/stars-palace/statrs-config v1.0.1 h1:KbVB/5UYLGJ4KO7RyCEQwi7nvXkSiuk6+t+B2n8WNIE=

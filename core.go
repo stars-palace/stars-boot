@@ -7,17 +7,17 @@ import (
 	"github.com/labstack/gommon/color"
 	"github.com/sirupsen/logrus"
 	"github.com/stars-palace/stars-boot/pkg/client/xgrpc_client"
-	"github.com/stars-palace/stars-boot/pkg/client/xnacos_client"
-	"github.com/stars-palace/stars-boot/pkg/discover"
-	"github.com/stars-palace/stars-boot/pkg/discover/nacos_discover"
-	"github.com/stars-palace/stars-boot/pkg/registry"
-	"github.com/stars-palace/stars-boot/pkg/registry/xnacos_registry"
-	"github.com/stars-palace/stars-boot/pkg/server"
 	"github.com/stars-palace/stars-boot/pkg/server/xgrpc"
 	"github.com/stars-palace/stars-boot/pkg/server/xhttp"
 	"github.com/stars-palace/stars-boot/pkg/worker"
 	"github.com/stars-palace/stars-boot/pkg/worker/task"
 	"github.com/stars-palace/stars-boot/pkg/xconst"
+	stars_registry_center "github.com/stars-palace/stars-registry-center"
+	"github.com/stars-palace/stars-registry-center/client/xnacos_client"
+	"github.com/stars-palace/stars-registry-center/discover"
+	"github.com/stars-palace/stars-registry-center/discover/nacos_discover"
+	"github.com/stars-palace/stars-registry-center/registry"
+	"github.com/stars-palace/stars-registry-center/registry/xnacos_registry"
 	"github.com/stars-palace/statrs-common/pkg/group"
 	"github.com/stars-palace/statrs-common/pkg/utils/xgo"
 	"github.com/stars-palace/statrs-common/pkg/xcast"
@@ -52,7 +52,7 @@ import (
 // Application is the framework's instance, it contains the servers, workers, client and configuration settings.
 // Create an instance of Application, by using &Application{}
 type Application struct {
-	servers     []server.Server
+	servers     []stars_registry_center.Server
 	workers     []worker.Worker
 	logger      *logrus.Logger
 	stopOnce    sync.Once
@@ -83,7 +83,7 @@ type Application struct {
 // 初始化应用
 func (app *Application) initialize() {
 	app.initOnce.Do(func() {
-		app.servers = make([]server.Server, 0)
+		app.servers = make([]stars_registry_center.Server, 0)
 		app.workers = make([]worker.Worker, 0)
 		app.signalHooker = hookSignals
 		app.defers = []func() error{}
@@ -427,7 +427,7 @@ func (app *Application) deregisterService() {
 }
 
 //注册服务
-func (app *Application) Serve(s server.Server) error {
+func (app *Application) Serve(s stars_registry_center.Server) error {
 	app.servers = append(app.servers, s)
 	return nil
 }

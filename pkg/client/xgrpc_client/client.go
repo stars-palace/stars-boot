@@ -5,10 +5,10 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/stars-palace/stars-boot/pkg/discover"
-	"github.com/stars-palace/stars-boot/pkg/registry"
-	"github.com/stars-palace/stars-boot/pkg/server"
 	"github.com/stars-palace/stars-boot/pkg/server/xgrpc"
+	stars_registry_center "github.com/stars-palace/stars-registry-center"
+	"github.com/stars-palace/stars-registry-center/discover"
+	"github.com/stars-palace/stars-registry-center/registry"
 	"github.com/stars-palace/statrs-common/pkg/xcodec"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/connectivity"
@@ -68,7 +68,7 @@ func RangeConns(f func(key, value interface{}) bool) {
 }
 
 // ChangeServerCons 改变服务的链接
-func ChangeServerCons(serverName string, servers []*server.ServiceInfo) ([]*grpc.ClientConn, error) {
+func ChangeServerCons(serverName string, servers []*stars_registry_center.ServiceInfo) ([]*grpc.ClientConn, error) {
 	var conns []*grpc.ClientConn
 	//通过遍历实例获取创建链接
 	for _, v := range servers {

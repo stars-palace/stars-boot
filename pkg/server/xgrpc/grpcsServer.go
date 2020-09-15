@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 	"github.com/sirupsen/logrus"
-	"github.com/stars-palace/stars-boot/pkg/server"
 	"github.com/stars-palace/stars-boot/pkg/xconst"
+	stars_registry_center "github.com/stars-palace/stars-registry-center"
 	"github.com/stars-palace/statrs-common/pkg/xlogger"
 	"google.golang.org/grpc"
 	"net"
@@ -99,8 +99,8 @@ func (s *Server) GracefulStop(ctx context.Context) error {
 
 // Info returns server info, used by governor and consumer balancer
 // 初始化服务信息
-func (s *Server) Info(group, cluster string) *server.ServiceInfo {
-	rpcParam := &server.ServiceInfo{
+func (s *Server) Info(group, cluster string) *stars_registry_center.ServiceInfo {
+	rpcParam := &stars_registry_center.ServiceInfo{
 		Name:        s.Name,
 		Scheme:      s.Name,
 		IP:          s.Host,
